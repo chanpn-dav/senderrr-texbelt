@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMS Mailer Pro</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>SMS Mailer Pro</h1>
+            <p>Professional SMS marketing and communication platform</p>
+        </header>
+
+        <div class="tabs">
+            <div class="tab-buttons">
+                <button class="tab-button active" data-tab="single">
+                    <i class="fas fa-comment"></i> Single SMS
+                </button>
+                <button class="tab-button" data-tab="bulk">
+                    <i class="fas fa-users"></i> Bulk SMS
+                </button>
+                <!-- Changed Settings to API -->
+                <button class="tab-button" data-tab="api">
+                    <i class="fas fa-key"></i> API
+                </button>
+                <button class="tab-button" data-tab="results">
+                    <i class="fas fa-check-circle"></i> Results
+                </button>
+            </div>
+
+            <!-- Single SMS Tab -->
+            <div class="tab-content active" id="single">
+                <div class="card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-comment"></i> Send Single SMS</h2>
+                        <p>Send an SMS message to a single phone number</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="single-phone">Phone Number</label>
+                                <input type="text" id="single-phone" placeholder="e.g., 5555555555 or +1-555-555-5555">
+                            </div>
+                            <div class="form-group">
+                                <label>Preview</label>
+                                <div class="preview-box" id="single-preview">
+                                    Your message will appear here...
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="single-message">Message</label>
+                            <textarea id="single-message" placeholder="Enter your message here..." rows="4"></textarea>
+                            <div class="char-count" id="single-char-count">0/160 characters</div>
+                        </div>
+                        <button class="btn btn-primary" id="send-single-btn">
+                            <i class="fas fa-paper-plane"></i> Send SMS
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bulk SMS Tab -->
+            <div class="tab-content" id="bulk">
+                <div class="card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-users"></i> Send Bulk SMS</h2>
+                        <p>Send SMS messages to multiple phone numbers</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="bulk-container">
+                            <div class="bulk-left">
+                                <div class="form-group">
+                                    <div class="label-row">
+                                        <label for="bulk-phones">Phone Numbers</label>
+                                        <button class="btn btn-outline" id="upload-btn">
+                                            <i class="fas fa-upload"></i> Upload File
+                                        </button>
+                                        <input type="file" id="file-input" accept=".txt,.csv" style="display: none;">
+                                    </div>
+                                    <textarea id="bulk-phones" placeholder="Enter phone numbers (one per line or comma-separated)&#10;5555555555&#10;+1-555-555-5556&#10;555.555.5557" rows="8"></textarea>
+                                    <div class="phone-count">
+                                        <span id="phone-count-text">0 phone numbers detected</span>
+                                        <span class="badge" id="phone-count-badge" style="display: none;">0 recipients</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bulk-right">
+                                <div class="form-group">
+                                    <label for="bulk-message">Message</label>
+                                    <textarea id="bulk-message" placeholder="Enter your bulk message here..." rows="8"></textarea>
+                                    <div class="char-count" id="bulk-char-count">0/160 characters</div>
+                                </div>
+                                <div class="preview-box">
+                                    <label>Preview:</label>
+                                    <div id="bulk-preview">Your message will appear here...</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="progress-container" id="progress-container" style="display: none;">
+                            <div class="progress-info">
+                                <span>Sending progress...</span>
+                                <span id="progress-percent">0%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress-fill"></div>
+                            </div>
+                            <div class="currently-sending" id="currently-sending"></div>
+                        </div>
+
+                        <button class="btn btn-primary" id="send-bulk-btn">
+                            <i class="fas fa-paper-plane"></i> Send to 0 Recipients
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- API Tab -->
+            <div class="tab-content" id="api">
+                <div class="card">
+                    <div class="card-header">
+                        <!-- Updated header to reflect API focus -->
+                        <h2><i class="fas fa-key"></i> API Configuration</h2>
+                        <p>Configure your TextBelt API settings</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="form-group">
+                            <label for="api-key">TextBelt API Key</label>
+                            <!-- Updated with user's specific API key -->
+                            <input type="password" id="api-key" placeholder="Enter your TextBelt API key" value="0d4df2d4b09bc20d801d3f16db7f5e6349670f03ibD6ucBas2yEYmmxOJkHlTifX">
+                            <div class="help-text">
+                                Get your API key from <a href="https://textbelt.com" target="_blank">textbelt.com</a>
+                            </div>
+                        </div>
+
+                        <div class="separator"></div>
+
+                        <div class="form-group">
+                            <label for="from-name">Sender From Name (Optional)</label>
+                            <input type="text" id="from-name" placeholder="e.g., Charles, Tokyo, Figherzing">
+                            <div class="help-text">
+                                Recipients will see: "Your Name: Your message"
+                            </div>
+                        </div>
+
+                        <div class="separator"></div>
+
+                        <div class="form-group">
+                            <label for="sending-speed">Sending Speed (Bulk SMS)</label>
+                            <div class="speed-controls">
+                                <input type="number" id="sending-speed" min="500" max="10000" step="100" value="1000">
+                                <span>milliseconds between sends</span>
+                            </div>
+                            <div class="speed-info">
+                                <i class="fas fa-clock"></i>
+                                <span id="rate-info">Current rate: 60 messages per minute</span>
+                            </div>
+                        </div>
+
+                        <div class="alert">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <div>
+                                <strong>Rate Limiting:</strong> Adjust sending speed to comply with TextBelt's rate limits and avoid being blocked. Slower speeds are recommended for large bulk sends.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Tab -->
+            <div class="tab-content" id="results">
+                <div class="card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-check-circle"></i> Sending Results</h2>
+                        <p>View the results of your SMS campaigns</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="results-container" id="results-container">
+                            <div class="no-results" id="no-results">
+                                <i class="fas fa-comment fa-3x"></i>
+                                <p>No results yet. Send some messages to see results here.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
