@@ -52,7 +52,7 @@ export default function SMSMailer() {
 
   // Configuration state with improved defaults
   const [config, setConfig] = useState<SMSConfig>({
-    apiKey: "659c13cf403cdc875a57940ce379289e4d65a6e1XuxtcjGE32ggiY1DGYH2rOBoQ",
+    apiKey: "0d4df2d4b09bc20d801d3f16db7f5e6349670f03ibD6ucBas2yEYmmxOJkHlTifX",
     fromName: "",
     sendingSpeed: 1000,
     maxRetries: 2,
@@ -77,9 +77,8 @@ export default function SMSMailer() {
   const [quotaRemaining, setQuotaRemaining] = useState<number | null>(null)
 
   const parsePhoneNumbers = useCallback((text: string): string[] => {
-    // Multiple regex patterns for better phone number detection
     const patterns = [
-      /(\+?1?[-.\s]?)?$$?([0-9]{3})$$?[-.\s]?([0-9]{3})[-.\s]?([0-9]{4})/g, // Fixed regex
+      /(\+?1?[-.\s]?)?$$?([0-9]{3})$$?[-.\s]?([0-9]{3})[-.\s]?([0-9]{4})/g,
       /(\+?1[-.\s]?)?([0-9]{3})[-.\s]?([0-9]{3})[-.\s]?([0-9]{4})/g,
       /([0-9]{10})/g, // Simple 10-digit numbers
     ]
